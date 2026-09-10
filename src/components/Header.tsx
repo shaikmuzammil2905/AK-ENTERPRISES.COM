@@ -33,7 +33,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0">
-            <div className="relative h-12 w-48 sm:h-14 sm:w-56">
+            <div className="relative h-14 w-56 sm:h-16 sm:w-64 lg:h-[72px] lg:w-72">
               <Image
                 src="/logo.png"
                 alt="AK ENTERPRISES - Dehydrated Food Products & Ingredients"

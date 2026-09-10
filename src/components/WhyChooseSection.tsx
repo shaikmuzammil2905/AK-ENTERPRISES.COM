@@ -33,13 +33,13 @@ export default function WhyChooseSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left: Dehydrated Chips Circular Visual */}
           <div className="lg:col-span-3 flex justify-center">
-            <div className="relative w-56 h-56 sm:w-64 sm:h-64 rounded-full overflow-hidden shadow-md border-4 border-white">
+            <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden shadow-lg border-4 border-white ring-2 ring-[#E1F2FB]">
               <Image
-                src="/images/why-choose-chips.png"
-                alt="Dehydrated vegetable chips and natural ingredients"
+                src="/images/why-choose-dehydrated.png"
+                alt="Colorful dehydrated vegetable chips and natural ingredients"
                 fill
-                sizes="(max-width: 1024px) 256px, 256px"
-                className="object-cover scale-105 hover:scale-110 transition-transform duration-700"
+                sizes="(max-width: 1024px) 256px, 288px"
+                className="object-cover scale-110 hover:scale-115 transition-transform duration-700"
               />
             </div>
           </div>

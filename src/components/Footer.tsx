@@ -15,12 +15,12 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-4">
             <Link href="/" className="inline-block mb-4">
-              <div className="relative h-14 w-52 bg-white/90 p-2 rounded-xl shadow-xs">
+              <div className="relative h-16 w-60 sm:h-20 sm:w-72 bg-white/95 p-3 rounded-2xl shadow-sm">
                 <Image
                   src="/logo.png"
                   alt="AK ENTERPRISES"
                   fill
-                  className="object-contain p-1"
+                  className="object-contain p-1.5"
                 />
               </div>
             </Link>
