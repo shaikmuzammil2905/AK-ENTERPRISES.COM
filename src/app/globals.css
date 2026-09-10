@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@keyframes heroZoom {
+  0%   { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+
 :root {
   --color-primary: #102A63;
   --color-navy: #27366F;
