@@ -1,26 +1,90 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: #102A63;
+  --color-navy: #27366F;
+  --color-dark-navy: #0D1B3E;
+  --color-cyan: #39BCE5;
+  --color-bright-blue: #0BA8EA;
+  --color-light-blue: #F1FAFE;
+  --color-light-blue-border: #E1F2FB;
+  --color-dark-text: #16244A;
+  --color-body-text: #4A5568;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+  color: #16244A;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Utilities for AK Enterprises branding */
+.bg-navy-deep {
+  background-color: #102A63;
+}
+
+.bg-navy-brand {
+  background-color: #27366F;
+}
+
+.bg-navy-darkest {
+  background-color: #0D1B3E;
+}
+
+.bg-cyan-brand {
+  background-color: #0BA8EA;
+}
+
+.bg-cyan-brand:hover {
+  background-color: #0996D3;
+}
+
+.bg-light-blue-brand {
+  background-color: #F1FAFE;
+}
+
+.text-navy-deep {
+  color: #102A63;
+}
+
+.text-navy-brand {
+  color: #27366F;
+}
+
+.text-cyan-brand {
+  color: #0BA8EA;
+}
+
+.text-dark-navy {
+  color: #16244A;
+}
+
+.border-light-blue {
+  border-color: #E1F2FB;
+}
+
+.border-cyan-brand {
+  border-color: #0BA8EA;
+}
+
+/* Smooth micro interactions */
+.transition-smooth {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1fafe;
+}
+::-webkit-scrollbar-thumb {
+  background: #b2dff4;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0ba8ea;
 }
