@@ -1,8 +1,16 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
 import { companyInfo, getPhoneLink, getMailtoLink, getWhatsAppLink } from "@/data/company";
+
+const certifications = [
+  { src: "/images/cert-iso-22000.png", alt: "ISO 22000 Certified" },
+  { src: "/images/cert-gmo.png", alt: "GMO Certified" },
+  { src: "/images/cert-organic.png", alt: "Organic Certified" },
+  { src: "/images/cert-iso-14001.png", alt: "ISO 14001 Environmental Management" },
+  { src: "/images/cert-brc-food.png", alt: "BRC Food Certificated" },
+];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -123,6 +131,55 @@ export default function Footer() {
                 <Mail className="w-4 h-4" />
                 <span>Email Inquiry</span>
               </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Certifications & Affiliations Section */}
+        <div className="py-10 border-b border-white/10">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 mb-3">
+              <ShieldCheck className="w-5 h-5 text-[#39BCE5]" />
+              <span className="text-xs sm:text-sm font-semibold text-[#39BCE5] uppercase tracking-widest">
+                Our Certifications
+              </span>
+              <ShieldCheck className="w-5 h-5 text-[#39BCE5]" />
+            </div>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white">
+              Certifications & Affiliations
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-4 sm:gap-6 md:gap-8 items-center justify-items-center max-w-3xl mx-auto">
+            {certifications.map((cert, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl p-3 sm:p-4 flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 shadow-lg hover:shadow-[#39BCE5]/20 hover:scale-105 transition-all duration-300"
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={cert.src}
+                    alt={cert.alt}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* GST / IEC Info Bar */}
+        <div className="py-6 border-b border-white/10">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-10">
+            <div className="flex items-center gap-2 text-xs sm:text-sm">
+              <span className="font-semibold text-[#39BCE5] uppercase tracking-wide">GST:</span>
+              <span className="text-gray-200 font-mono tracking-wider">37CZPPM6404E1Z6</span>
+            </div>
+            <div className="hidden sm:block w-px h-5 bg-white/20" />
+            <div className="flex items-center gap-2 text-xs sm:text-sm">
+              <span className="font-semibold text-[#39BCE5] uppercase tracking-wide">IEC:</span>
+              <span className="text-gray-200 font-mono tracking-wider">CZPPM6404E</span>
             </div>
           </div>
         </div>
