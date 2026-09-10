@@ -10,56 +10,117 @@ export default function Hero() {
   const { openInquiry } = useInquiry();
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#e8f4fd] via-[#f0f8ff] to-white">
-      {/* Desktop Hero — Full-width background image with animated subtle zoom */}
-      <div className="hidden md:block relative w-full">
-        <div className="relative w-full" style={{ aspectRatio: "1568 / 620" }}>
+    <>
+      {/* ============ DESKTOP HERO ============ */}
+      <section className="hidden md:block relative w-full overflow-hidden bg-[#e8f4fd]">
+        {/* Full-width background image with subtle animated zoom */}
+        <div
+          className="relative w-full"
+          style={{ aspectRatio: "1568 / 620" }}
+        >
           <Image
             src="/images/hero-bg.png"
-            alt="Premium dehydrated vegetables, herbs, masala powders, and natural ingredients – AK Enterprises"
+            alt="Premium dehydrated vegetables, herbs, masala powders and natural ingredients – AK Enterprises"
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center animate-[heroZoom_20s_ease-in-out_infinite_alternate]"
+            className="object-cover object-center"
+            style={{
+              animation: "heroZoom 20s ease-in-out infinite alternate",
+            }}
           />
-        </div>
-      </div>
 
-      {/* Mobile Hero — Content + image below, matching mobile reference */}
-      <div className="md:hidden pt-6 pb-4 px-4">
-        <div className="mb-5">
+          {/* Overlay content — positioned over the left side of the hero image */}
+          <div className="absolute inset-0 flex items-center">
+            <div className="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+              <div className="max-w-[52%]">
+                {/* Eyebrow */}
+                <div className="flex items-center gap-2 mb-4">
+                  <span className="h-0.5 w-8 bg-[#0BA8EA] rounded-full" />
+                  <span className="text-xs font-bold tracking-widest text-[#102A63] uppercase">
+                    DEHYDRATED PRODUCTS | FOOD INGREDIENTS | IMPORT &amp; EXPORT
+                  </span>
+                </div>
+
+                {/* Main Heading */}
+                <h1 className="text-4xl xl:text-5xl 2xl:text-[3.25rem] font-extrabold text-[#102A63] tracking-tight leading-[1.12] mb-4">
+                  Premium Dehydrated
+                  <br />
+                  <span className="text-[#0BA8EA]">Food Ingredients</span>
+                </h1>
+
+                {/* Subtitle */}
+                <p className="text-sm xl:text-base text-[#4A5568] leading-relaxed mb-7 max-w-lg">
+                  Explore our range of dehydrated vegetables, herbal powders,
+                  masala powders and natural food ingredients for B2B supply and
+                  export/import requirements.
+                </p>
+
+                {/* CTA Buttons */}
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link
+                    href="/products"
+                    className="inline-flex items-center gap-2 px-7 py-3 bg-[#0BA8EA] hover:bg-[#0996D3] text-white text-sm font-bold rounded-full shadow-md hover:shadow-lg transition-all group"
+                  >
+                    <span>Explore Products</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={() => openInquiry()}
+                    className="inline-flex items-center gap-2 px-7 py-3 bg-white/80 hover:bg-white border border-[#0BA8EA] text-[#0BA8EA] text-sm font-bold rounded-full shadow-sm hover:shadow-md transition-all cursor-pointer backdrop-blur-sm"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>Send Inquiry</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ MOBILE HERO ============ */}
+      <section className="md:hidden bg-gradient-to-b from-[#e8f4fd] to-[#f5fbff] overflow-hidden">
+        {/* Top content area */}
+        <div className="px-4 pt-6 pb-0">
           {/* Eyebrow */}
-          <div className="flex items-center gap-2 mb-3">
-            <span className="h-0.5 w-6 bg-[#0BA8EA] rounded-full" />
-            <span className="text-[10px] sm:text-xs font-bold tracking-wider text-[#0BA8EA] uppercase leading-tight">
-              DEHYDRATED PRODUCTS | FOOD INGREDIENTS | IMPORT & EXPORT
+          <div className="flex items-start gap-2 mb-3">
+            <span className="h-0.5 w-5 bg-[#0BA8EA] rounded-full mt-2 shrink-0" />
+            <span className="text-[10px] font-bold tracking-wider text-[#0BA8EA] uppercase leading-snug">
+              DEHYDRATED PRODUCTS | FOOD INGREDIENTS | IMPORT &amp; EXPORT
             </span>
           </div>
 
-          {/* Main Title */}
-          <h1 className="text-[1.75rem] sm:text-3xl font-extrabold text-[#102A63] tracking-tight leading-[1.15] mb-3">
-            Premium Dehydrated<br />
+          {/* Heading */}
+          <h1 className="text-[1.85rem] font-extrabold text-[#102A63] tracking-tight leading-[1.15] mb-3">
+            Premium Dehydrated
+            <br />
             <span className="text-[#0BA8EA]">Food Ingredients</span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-sm text-[#4A5568] leading-relaxed mb-5">
-            Explore our range of dehydrated vegetables, herbal powders, masala powders and natural food ingredients for B2B supply and export/import requirements.
+            Explore our range of dehydrated vegetables, herbal powders, masala
+            powders and natural food ingredients for B2B supply and
+            export/import requirements.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-wrap items-center gap-3">
+          {/* CTA Buttons — stacked on mobile for easy tap */}
+          <div className="flex flex-col xs:flex-row gap-3 mb-5">
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0BA8EA] hover:bg-[#0996D3] text-white text-sm font-semibold rounded-lg shadow-sm transition-all group"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#0BA8EA] hover:bg-[#0996D3] text-white text-sm font-bold rounded-full shadow-md transition-all group"
             >
               <span>Explore Products</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
+
             <button
               type="button"
               onClick={() => openInquiry()}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white hover:bg-[#F1FAFE] border border-[#0BA8EA] text-[#0BA8EA] text-sm font-semibold rounded-lg shadow-xs transition-all cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-[#F1FAFE] border border-[#0BA8EA] text-[#0BA8EA] text-sm font-bold rounded-full shadow-sm transition-all cursor-pointer"
             >
               <Mail className="w-4 h-4" />
               <span>Send Inquiry</span>
@@ -67,8 +128,8 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Mobile Hero Image — full-width, matching mobile reference */}
-        <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden -mx-4 px-0" style={{ width: "calc(100% + 2rem)" }}>
+        {/* Full-width hero image — bottom, touching edges */}
+        <div className="relative w-full" style={{ aspectRatio: "4 / 3" }}>
           <Image
             src="/images/hero-bg.png"
             alt="Premium dehydrated food ingredients – AK Enterprises"
@@ -78,19 +139,15 @@ export default function Hero() {
             className="object-cover object-bottom"
           />
         </div>
-      </div>
+      </section>
 
-      {/* Hero zoom animation */}
-      <style jsx global>{`
+      {/* Global hero zoom animation */}
+      <style>{`
         @keyframes heroZoom {
-          0% {
-            transform: scale(1);
-          }
-          100% {
-            transform: scale(1.04);
-          }
+          0%   { transform: scale(1); }
+          100% { transform: scale(1.05); }
         }
       `}</style>
-    </section>
+    </>
   );
 }

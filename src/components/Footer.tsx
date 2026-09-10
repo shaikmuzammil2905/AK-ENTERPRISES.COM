@@ -14,13 +14,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
           {/* Brand Column */}
           <div className="lg:col-span-4">
-            <Link href="/" className="inline-block mb-4">
-              <div className="relative h-16 w-60 sm:h-20 sm:w-72 bg-white/95 p-3 rounded-2xl shadow-sm">
+            <Link href="/" className="inline-block mb-5">
+              <div className="relative h-20 w-64 sm:h-24 sm:w-72">
                 <Image
                   src="/logo.png"
                   alt="AK ENTERPRISES"
                   fill
-                  className="object-contain p-1.5"
+                  className="object-contain object-left"
                 />
               </div>
             </Link>
