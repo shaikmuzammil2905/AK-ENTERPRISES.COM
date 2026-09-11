@@ -26,7 +26,14 @@ export const metadata: Metadata = {
     "Export Food Ingredients India",
   ],
   icons: {
-    icon: "/logo.png",
+    icon: [
+      { url: "/logo.png", type: "image/png" },
+    ],
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+    other: [
+      { rel: "apple-touch-icon", url: "/logo.png" },
+    ],
   },
 };
 
