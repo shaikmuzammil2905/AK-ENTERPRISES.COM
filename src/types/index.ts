@@ -5,6 +5,8 @@ export interface Category {
   shortDescription?: string;
   image: string;
   iconName?: string;
+  displayOrder?: number;
+  active?: boolean;
 }
 
 export interface ProductSpecification {
@@ -18,6 +20,7 @@ export interface Product {
   name: string;
   category: string;
   categorySlug: string;
+  categoryId?: string;
   shortDescription: string;
   image: string;
   description?: string;
@@ -26,6 +29,10 @@ export interface Product {
   packaging?: string;
   specifications?: ProductSpecification[];
   featured?: boolean;
+  active?: boolean;
+  displayOrder?: number;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface CompanyInfo {
@@ -45,6 +52,59 @@ export interface CompanyInfo {
   phones: string[];
   whatsapp: string;
   email: string;
+}
+
+export interface HeroContent {
+  eyebrow: string;
+  title: string;
+  description: string;
+  badge: string;
+  primaryBtnText: string;
+  primaryBtnLink: string;
+  secondaryBtnText: string;
+  secondaryBtnLink: string;
+  heroImage: string;
+  visible?: boolean;
+}
+
+export interface WhyChoosePoint {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export interface WhyChooseContent {
+  title: string;
+  subtitle: string;
+  description: string;
+  points: WhyChoosePoint[];
+  visible?: boolean;
+}
+
+export interface PreFooterCTAContent {
+  title: string;
+  description: string;
+  buttonText: string;
+  visible?: boolean;
+}
+
+export interface Certification {
+  id: string;
+  name: string;
+  image: string;
+  displayOrder?: number;
+  active?: boolean;
+}
+
+export interface ActivityLog {
+  id: string;
+  adminEmail: string;
+  action: string;
+  itemType: string;
+  itemId?: string;
+  details?: string;
+  createdAt: string;
 }
 
 export interface InquiryFormData {

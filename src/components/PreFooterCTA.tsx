@@ -1,13 +1,27 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Mail, ArrowRight, MessageCircle } from "lucide-react";
 import { useInquiry } from "@/context/InquiryContext";
 import { getWhatsAppLink } from "@/data/company";
+import { PreFooterCTAContent } from "@/types";
+import { getSiteContent } from "@/lib/db";
 
 export default function PreFooterCTA() {
   const { openInquiry } = useInquiry();
   const whatsappUrl = getWhatsAppLink("Hello AK Enterprises, I would like to discuss our bulk supply requirements.");
+  const [content, setContent] = useState<PreFooterCTAContent>({
+    title: "Ready to Discuss Your Requirements?",
+    description: "Get in touch with us for product details, quotations and bulk supply.",
+    buttonText: "Send Inquiry",
+    visible: true,
+  });
+
+  useEffect(() => {
+    getSiteContent<PreFooterCTAContent>("pre_footer_cta", content).then((data) => setContent(data));
+  }, []);
+
+  if (content.visible === false) return null;
 
   return (
     <section className="bg-gradient-to-r from-[#102A63] via-[#1a3880] to-[#0ba8ea] text-white py-10 sm:py-12 relative overflow-hidden">
@@ -20,10 +34,10 @@ export default function PreFooterCTA() {
             </div>
             <div>
               <h2 className="text-xl sm:text-2xl font-bold mb-1">
-                Ready to Discuss Your Requirements?
+                {content.title}
               </h2>
               <p className="text-xs sm:text-sm text-blue-100 max-w-xl">
-                Get in touch with us for product details, quotations and bulk supply.
+                {content.description}
               </p>
             </div>
           </div>
@@ -35,7 +49,7 @@ export default function PreFooterCTA() {
               onClick={() => openInquiry()}
               className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#102A63] hover:bg-blue-50 text-sm font-bold rounded-lg shadow-md transition-all cursor-pointer"
             >
-              <span>Send Inquiry</span>
+              <span>{content.buttonText || "Send Inquiry"}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <a

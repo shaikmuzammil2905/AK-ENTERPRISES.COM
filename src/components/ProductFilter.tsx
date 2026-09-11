@@ -1,20 +1,24 @@
 "use client";
 
 import React from "react";
-import { categories } from "@/data/categories";
+import { categories as defaultCategories } from "@/data/categories";
+import { Category } from "@/types";
 
 interface ProductFilterProps {
   selectedCategory: string;
   onSelectCategory: (slug: string) => void;
+  categories?: Category[];
 }
 
 export default function ProductFilter({
   selectedCategory,
   onSelectCategory,
+  categories = defaultCategories,
 }: ProductFilterProps) {
+  const activeCats = categories.length > 0 ? categories : defaultCategories;
   const filterOptions = [
     { slug: "all", name: "ALL" },
-    ...categories.map((c) => ({
+    ...activeCats.map((c) => ({
       slug: c.slug,
       name: c.name.toUpperCase(),
     })),

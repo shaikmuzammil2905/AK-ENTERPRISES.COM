@@ -1,23 +1,42 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import { Search } from "lucide-react";
+import { Search, Loader2 } from "lucide-react";
 import ProductFilter from "@/components/ProductFilter";
 import ProductCard from "@/components/ProductCard";
 import PreFooterCTA from "@/components/PreFooterCTA";
-import { products } from "@/data/products";
+import { getProducts, getCategories } from "@/lib/db";
+import { Product, Category } from "@/types";
 
 export default function ProductsClient() {
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get("category") || "all";
   const initialQuery = searchParams.get("q") || "";
 
+  const [productsList, setProductsList] = useState<Product[]>([]);
+  const [categoriesList, setCategoriesList] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
 
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const [prods, cats] = await Promise.all([getProducts(false), getCategories(false)]);
+        setProductsList(prods);
+        setCategoriesList(cats);
+      } catch (err) {
+        console.error("Failed to load products/categories:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
   const filteredProducts = useMemo(() => {
-    return products.filter((p) => {
+    return productsList.filter((p) => {
       const matchesCat =
         selectedCategory === "all" || p.categorySlug === selectedCategory;
       const matchesSearch =
@@ -28,7 +47,7 @@ export default function ProductsClient() {
 
       return matchesCat && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [productsList, selectedCategory, searchQuery]);
 
   return (
     <div>
@@ -61,6 +80,7 @@ export default function ProductsClient() {
               <ProductFilter
                 selectedCategory={selectedCategory}
                 onSelectCategory={(slug) => setSelectedCategory(slug)}
+                categories={categoriesList}
               />
             </div>
 
@@ -70,7 +90,7 @@ export default function ProductsClient() {
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2.5 pl-10 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-[#0BA8EA] focus:ring-1 focus:ring-[#0BA8EA]"
+                className="w-full px-4 py-2.5 pl-10 text-sm bg-gray-50 border border-gray-200 rounded-xl focus:outline-hidden focus:border-[#0BA8EA] focus:ring-1 focus:ring-[#0BA8EA]"
               />
               <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
             </div>
@@ -82,7 +102,12 @@ export default function ProductsClient() {
           </div>
 
           {/* Products Grid */}
-          {filteredProducts.length === 0 ? (
+          {loading ? (
+            <div className="py-16 text-center text-gray-400 flex flex-col items-center justify-center gap-2">
+              <Loader2 className="w-8 h-8 text-[#0BA8EA] animate-spin" />
+              <span className="text-xs font-semibold">Loading product catalog...</span>
+            </div>
+          ) : filteredProducts.length === 0 ? (
             <div className="py-16 text-center bg-[#F1FAFE] rounded-2xl border border-[#E1F2FB] px-4">
               <p className="text-[#102A63] font-bold text-base mb-1">No products found</p>
               <p className="text-xs text-gray-500 max-w-sm mx-auto">
@@ -94,7 +119,7 @@ export default function ProductsClient() {
                   setSelectedCategory("all");
                   setSearchQuery("");
                 }}
-                className="mt-4 px-4 py-2 bg-[#0BA8EA] text-white text-xs font-semibold rounded-lg"
+                className="mt-4 px-4 py-2 bg-[#0BA8EA] text-white text-xs font-semibold rounded-lg cursor-pointer"
               >
                 Reset Filters
               </button>

@@ -1,20 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 import { useInquiry } from "@/context/InquiryContext";
+import { HeroContent } from "@/types";
+import { getSiteContent } from "@/lib/db";
 
-/**
- * Hero — full-width background image with text overlaid on the left.
- *
- * Desktop: tall hero, products visible on right side of BG image.
- * Mobile:  shorter hero, products still visible, text on left.
- *
- * Single render tree. Background via CSS background-image (not <Image>).
- */
-export default function Hero() {
+interface HeroProps {
+  initialContent?: HeroContent;
+}
+
+export default function Hero({ initialContent }: HeroProps) {
   const { openInquiry } = useInquiry();
+  const [content, setContent] = useState<HeroContent>(
+    initialContent || {
+      eyebrow: "DEHYDRATED PRODUCTS | FOOD INGREDIENTS | IMPORT & EXPORT",
+      title: "Premium Dehydrated Food Ingredients",
+      description:
+        "Explore our range of dehydrated vegetables, herbal powders, masala powders and natural food ingredients for B2B supply and export/import requirements.",
+      badge: "PROVEN QUALITY",
+      primaryBtnText: "Explore Products",
+      primaryBtnLink: "/products",
+      secondaryBtnText: "Send Inquiry",
+      secondaryBtnLink: "/contact",
+      heroImage: "/images/hero-bg.png",
+      visible: true,
+    }
+  );
+
+  useEffect(() => {
+    if (!initialContent) {
+      getSiteContent<HeroContent>("hero", content).then((data) => setContent(data));
+    }
+  }, [initialContent]);
+
+  if (content.visible === false) return null;
 
   return (
     <section
@@ -22,7 +43,7 @@ export default function Hero() {
         position: "relative",
         width: "100%",
         overflow: "hidden",
-        backgroundImage: "url(/images/hero-bg.png)",
+        backgroundImage: `url(${content.heroImage || "/images/hero-bg.png"})`,
         backgroundSize: "cover",
         backgroundPosition: "center right",
         backgroundRepeat: "no-repeat",
@@ -72,7 +93,7 @@ export default function Hero() {
               lineHeight: 1.4,
             }}
           >
-            DEHYDRATED PRODUCTS | FOOD INGREDIENTS | IMPORT &amp; EXPORT
+            {content.eyebrow}
           </span>
         </div>
 
@@ -88,9 +109,7 @@ export default function Hero() {
             maxWidth: "600px",
           }}
         >
-          Premium Dehydrated
-          <br />
-          <span style={{ color: "#0BA8EA" }}>Food Ingredients</span>
+          {content.title}
         </h1>
 
         {/* Description */}
@@ -103,9 +122,7 @@ export default function Hero() {
             maxWidth: "480px",
           }}
         >
-          Explore our range of dehydrated vegetables, herbal powders,
-          masala powders and natural food ingredients for B2B supply
-          and export/import requirements.
+          {content.description}
         </p>
 
         {/* CTA Buttons */}
@@ -118,7 +135,7 @@ export default function Hero() {
           }}
         >
           <Link
-            href="/products"
+            href={content.primaryBtnLink || "/products"}
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -135,7 +152,7 @@ export default function Hero() {
               transition: "background 0.2s",
             }}
           >
-            Explore Products
+            {content.primaryBtnText || "Explore Products"}
             <ArrowRight style={{ width: "1rem", height: "1rem" }} />
           </Link>
 
@@ -160,12 +177,11 @@ export default function Hero() {
             }}
           >
             <Mail style={{ width: "1rem", height: "1rem" }} />
-            Send Inquiry
+            {content.secondaryBtnText || "Send Inquiry"}
           </button>
         </div>
       </div>
 
-      {/* Responsive padding for desktop */}
       <style>{`
         .hero-content {
           padding: 3rem 1.25rem !important;

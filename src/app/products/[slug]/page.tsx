@@ -7,7 +7,7 @@ import { ChevronRight, ShieldCheck, Truck, CheckCircle2 } from "lucide-react";
 import ProductDetailActions from "./ProductDetailActions";
 import ProductCard from "@/components/ProductCard";
 import PreFooterCTA from "@/components/PreFooterCTA";
-import { products, getProductBySlug, getRelatedProducts } from "@/data/products";
+import { getProductBySlug, getProducts } from "@/lib/db";
 
 interface PageProps {
   params: Promise<{
@@ -16,6 +16,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
+  const products = await getProducts(true);
   return products.map((product) => ({
     slug: product.slug,
   }));
@@ -23,7 +24,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     return {
@@ -49,13 +50,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
 
-  const relatedProducts = getRelatedProducts(product.slug, product.categorySlug);
+  const allProducts = await getProducts(false);
+  const relatedProducts = allProducts
+    .filter((p) => p.slug !== product.slug && p.categorySlug === product.categorySlug)
+    .slice(0, 4);
 
   return (
     <div>
