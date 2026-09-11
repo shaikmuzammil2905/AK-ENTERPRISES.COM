@@ -47,7 +47,6 @@ export default function Hero({ initialContent }: HeroProps) {
         backgroundSize: "cover",
         backgroundPosition: "center right",
         backgroundRepeat: "no-repeat",
-        animation: "heroZoom 20s ease-in-out infinite alternate",
       }}
     >
       {/* Light overlay for text readability on the left side */}
