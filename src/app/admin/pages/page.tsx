@@ -249,7 +249,7 @@ export default function AdminPagesEditor() {
           </div>
           <button
             onClick={() => {
-              setEditingCert({ name: "", image: "/images/certifications/iso.png", displayOrder: certifications.length + 1, active: true });
+              setEditingCert({ name: "", image: "/logo.png", displayOrder: certifications.length + 1, active: true });
               setCertModalOpen(true);
             }}
             className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white rounded-xl flex items-center gap-1.5 cursor-pointer"
@@ -263,7 +263,7 @@ export default function AdminPagesEditor() {
           {certifications.map((cert) => (
             <div key={cert.id} className="p-4 bg-slate-900 rounded-2xl border border-slate-800 flex flex-col items-center justify-between gap-3 text-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={cert.image} alt={cert.name} className="w-16 h-16 object-contain rounded-xl bg-white p-2" />
+              <img src={cert.image || "/logo.png"} alt={cert.name} className="w-16 h-16 object-contain rounded-xl bg-white p-2" onError={(e) => { e.currentTarget.src = "/logo.png"; }} />
               <div>
                 <p className="font-bold text-xs text-white">{cert.name}</p>
                 <span className="text-[10px] text-slate-500 font-mono">Order #{cert.displayOrder}</span>

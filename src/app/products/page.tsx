@@ -1,4 +1,6 @@
 import { Suspense } from "react";
+
+export const dynamic = 'force-dynamic';
 import { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
 

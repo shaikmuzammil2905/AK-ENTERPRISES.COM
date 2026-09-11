@@ -7,7 +7,9 @@ import { ChevronRight, ShieldCheck, Truck, CheckCircle2 } from "lucide-react";
 import ProductDetailActions from "./ProductDetailActions";
 import ProductCard from "@/components/ProductCard";
 import PreFooterCTA from "@/components/PreFooterCTA";
-import { getProductBySlug, getProducts } from "@/lib/db";
+import { getProducts, getProductBySlug, getCategories } from "@/lib/db";
+
+export const dynamic = 'force-dynamic';
 
 interface PageProps {
   params: Promise<{

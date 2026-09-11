@@ -9,6 +9,8 @@ import WhyChooseSection from "@/components/WhyChooseSection";
 import PreFooterCTA from "@/components/PreFooterCTA";
 import { getCategories, getProducts } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const [categories, products] = await Promise.all([
     getCategories(false),

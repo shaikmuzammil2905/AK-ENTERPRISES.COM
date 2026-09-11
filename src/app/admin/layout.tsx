@@ -50,7 +50,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       if (session && session.user) {
         setUserEmail(session.user.email || "admin@ak-enterprises.com");
       } else {
-        setUserEmail("admin@ak-enterprises.com");
+        router.push("/admin/login");
       }
       setLoading(false);
     });
@@ -61,7 +61,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       if (session) {
         setUserEmail(session.user.email || "admin@ak-enterprises.com");
       } else if (!isAuthRoute) {
-        setUserEmail("admin@ak-enterprises.com");
+        router.push("/admin/login");
       }
     });
 

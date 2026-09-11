@@ -49,7 +49,7 @@ export default function ImageUploader({ value, onChange, label = "Image Upload",
       {value ? (
         <div className="relative group rounded-2xl overflow-hidden border border-gray-200 bg-gray-50 aspect-video flex items-center justify-center p-2 max-h-48">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={value} alt="Uploaded Preview" className="max-h-full max-w-full object-contain rounded-lg" />
+          <img src={value} alt="Uploaded Preview" className="max-h-full max-w-full object-contain rounded-lg" onError={(e) => { e.currentTarget.src = "/logo.png"; }} />
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
             <label className="p-2 bg-white text-gray-800 rounded-xl hover:bg-gray-100 cursor-pointer text-xs font-semibold shadow-md flex items-center gap-1.5">
               <Upload className="w-3.5 h-3.5" />

@@ -303,9 +303,10 @@ export default function AdminProductsPage() {
                       <div className="flex items-center gap-3">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={prod.image || "/images/products/neem-powder.png"}
+                          src={prod.image || "/logo.png"}
                           alt={prod.name}
                           className="w-12 h-12 rounded-xl object-cover bg-slate-900 border border-slate-800 shrink-0"
+                          onError={(e) => { e.currentTarget.src = "/logo.png"; }}
                         />
                         <div>
                           <p className="font-bold text-sm text-white">{prod.name}</p>
@@ -314,7 +315,7 @@ export default function AdminProductsPage() {
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 font-semibold text-slate-300">
+                      <span className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 font-semibold text-slate-300 whitespace-nowrap">
                         {prod.category}
                       </span>
                     </td>
