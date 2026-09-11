@@ -15,192 +15,106 @@ export default function Hero({ initialContent }: HeroProps) {
   const { openInquiry } = useInquiry();
   const [content, setContent] = useState<HeroContent>(
     initialContent || {
-      eyebrow: "DEHYDRATED PRODUCTS | FOOD INGREDIENTS | IMPORT & EXPORT",
-      title: "Premium Dehydrated Food Ingredients",
+      eyebrow: "DEHYDRATED PRODUCTS | FOOD INGREDIENTS | GLOBAL EXPORT SUPPLY",
+      title: "Premium Dehydrated Vegetables & Herbal Powders",
       description:
-        "Explore our range of dehydrated vegetables, herbal powders, masala powders and natural food ingredients for B2B supply and export/import requirements.",
-      badge: "PROVEN QUALITY",
+        "Leading processor and exporter of premium quality dehydrated vegetables, herbal powders, masala powders, and natural food ingredients.",
+      badge: "PROVEN QUALITY | GLOBAL EXPORT",
       primaryBtnText: "Explore Products",
       primaryBtnLink: "/products",
-      secondaryBtnText: "Send Inquiry",
+      secondaryBtnText: "Contact Us",
       secondaryBtnLink: "/contact",
       heroImage: "/images/hero-bg.png",
       visible: true,
     }
   );
 
+  const [imgSrc, setImgSrc] = useState<string>(content.heroImage || "/images/hero-bg.png");
+
   useEffect(() => {
     if (!initialContent) {
-      getSiteContent<HeroContent>("hero", content).then((data) => setContent(data));
+      getSiteContent<HeroContent>("hero", content).then((data) => {
+        if (data) {
+          setContent(data);
+          setImgSrc(data.heroImage || "/images/hero-bg.png");
+        }
+      });
     }
   }, [initialContent]);
+
+  useEffect(() => {
+    if (content.heroImage) {
+      setImgSrc(content.heroImage);
+    }
+  }, [content.heroImage]);
 
   if (content.visible === false) return null;
 
   return (
-    <section
-      style={{
-        position: "relative",
-        width: "100%",
-        overflow: "hidden",
-        backgroundImage: `url(${content.heroImage || "/images/hero-bg.png"})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center right",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      {/* Light overlay for text readability on the left side */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to right, rgba(232,244,253,0.92) 0%, rgba(232,244,253,0.75) 40%, rgba(232,244,253,0.15) 65%, transparent 80%)",
-          pointerEvents: "none",
-        }}
-      />
+    <section className="relative w-full bg-[#e8f4fd] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12 md:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Column: Text & Buttons */}
+          <div className="md:col-span-7 xl:col-span-6 z-10">
+            {/* Eyebrow */}
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
+              <span className="h-0.5 w-6 bg-[#0BA8EA] rounded-full shrink-0" />
+              <span className="text-xs font-bold tracking-wider text-[#0BA8EA] uppercase leading-snug">
+                {content.eyebrow}
+              </span>
+            </div>
 
-      {/* Content container — left-aligned text, right side shows the BG image */}
-      <div
-        className="hero-content"
-        style={{
-          position: "relative",
-          zIndex: 1,
-          maxWidth: "1280px",
-          margin: "0 auto",
-          padding: "3rem 1.25rem",
-        }}
-      >
-        {/* Eyebrow */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
-          <span
-            style={{
-              width: "1.5rem",
-              height: "2px",
-              background: "#0BA8EA",
-              borderRadius: "9999px",
-              flexShrink: 0,
-            }}
-          />
-          <span
-            style={{
-              fontSize: "0.7rem",
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              color: "#0BA8EA",
-              textTransform: "uppercase" as const,
-              lineHeight: 1.4,
-            }}
-          >
-            {content.eyebrow}
-          </span>
-        </div>
+            {/* Main Heading */}
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl xl:text-[3.25rem] font-extrabold text-[#102A63] tracking-tight leading-[1.15] mb-4">
+              {content.title}
+            </h1>
 
-        {/* Main Heading */}
-        <h1
-          style={{
-            fontWeight: 800,
-            color: "#102A63",
-            letterSpacing: "-0.02em",
-            lineHeight: 1.1,
-            marginBottom: "1rem",
-            fontSize: "clamp(2rem, 6vw, 3.5rem)",
-            maxWidth: "600px",
-          }}
-        >
-          {content.title}
-        </h1>
+            {/* Description */}
+            <p className="text-sm sm:text-base text-[#4A5568] leading-relaxed mb-6 sm:mb-8 max-w-xl">
+              {content.description}
+            </p>
 
-        {/* Description */}
-        <p
-          style={{
-            fontSize: "clamp(0.875rem, 1.5vw, 1rem)",
-            color: "#4A5568",
-            lineHeight: 1.6,
-            marginBottom: "2rem",
-            maxWidth: "480px",
-          }}
-        >
-          {content.description}
-        </p>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
+              <Link
+                href={content.primaryBtnLink || "/products"}
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#0BA8EA] hover:bg-[#0996D3] text-white font-bold text-sm sm:text-base rounded-full shadow-md hover:shadow-lg transition-all group min-h-[48px]"
+              >
+                <span>{content.primaryBtnText || "Explore Products"}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
 
-        {/* CTA Buttons */}
-        <div
-          className="hero-buttons"
-          style={{
-            display: "flex",
-            gap: "0.875rem",
-            flexWrap: "wrap" as const,
-          }}
-        >
-          <Link
-            href={content.primaryBtnLink || "/products"}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.875rem 1.75rem",
-              background: "#0BA8EA",
-              color: "#fff",
-              fontWeight: 700,
-              fontSize: "0.9375rem",
-              borderRadius: "9999px",
-              textDecoration: "none",
-              boxShadow: "0 4px 14px rgba(11,168,234,0.35)",
-              minHeight: "48px",
-              transition: "background 0.2s",
-            }}
-          >
-            {content.primaryBtnText || "Explore Products"}
-            <ArrowRight style={{ width: "1rem", height: "1rem" }} />
-          </Link>
+              <button
+                type="button"
+                onClick={() => openInquiry()}
+                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white hover:bg-slate-50 border-2 border-[#0BA8EA] text-[#0BA8EA] font-bold text-sm sm:text-base rounded-full shadow-sm hover:shadow-md transition-all cursor-pointer min-h-[48px]"
+              >
+                <Mail className="w-4 h-4" />
+                <span>{content.secondaryBtnText || "Contact Us"}</span>
+              </button>
+            </div>
+          </div>
 
-          <button
-            type="button"
-            onClick={() => openInquiry()}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.875rem 1.75rem",
-              background: "#ffffff",
-              color: "#0BA8EA",
-              fontWeight: 700,
-              fontSize: "0.9375rem",
-              borderRadius: "9999px",
-              border: "2px solid #0BA8EA",
-              cursor: "pointer",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-              minHeight: "48px",
-              transition: "background 0.2s",
-            }}
-          >
-            <Mail style={{ width: "1rem", height: "1rem" }} />
-            {content.secondaryBtnText || "Send Inquiry"}
-          </button>
+          {/* Right Column / Bottom Mobile: Hero Picture (100% visible, no blinking) */}
+          <div className="md:col-span-5 xl:col-span-6 w-full flex justify-center items-center">
+            <div className="relative w-full max-w-lg lg:max-w-none rounded-2xl overflow-hidden shadow-xl border border-sky-100/80 bg-white/50">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={imgSrc}
+                alt={content.title || "Premium Dehydrated Food Ingredients"}
+                onError={() => {
+                  if (imgSrc !== "/images/hero-bg.png") {
+                    setImgSrc("/images/hero-bg.png");
+                  }
+                }}
+                className="w-full h-auto max-h-[350px] sm:max-h-[450px] lg:max-h-[500px] object-cover object-center"
+              />
+            </div>
+          </div>
+
         </div>
       </div>
-
-      <style>{`
-        .hero-content {
-          padding: 3rem 1.25rem !important;
-        }
-        @media (min-width: 768px) {
-          .hero-content {
-            padding: 5rem 3rem !important;
-            min-height: 440px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-          }
-        }
-        @media (min-width: 1024px) {
-          .hero-content {
-            padding: 5rem 4rem !important;
-            min-height: 500px;
-          }
-        }
-      `}</style>
     </section>
   );
 }

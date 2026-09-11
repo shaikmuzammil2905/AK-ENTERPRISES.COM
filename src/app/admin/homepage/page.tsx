@@ -17,7 +17,7 @@ export default function AdminHomepageEditor() {
     primaryBtnLink: "/products",
     secondaryBtnText: "Contact Us",
     secondaryBtnLink: "/contact",
-    heroImage: "/images/hero-dehydrated-food.png",
+    heroImage: "/images/hero-bg.png",
     visible: true,
   });
 
