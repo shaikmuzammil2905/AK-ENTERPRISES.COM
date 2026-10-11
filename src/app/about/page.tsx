@@ -8,9 +8,20 @@ import { companyInfo } from "@/data/company";
 import { categories } from "@/data/categories";
 
 export const metadata: Metadata = {
-  title: "About Us | AK Enterprises - Dehydrated Food Ingredients",
+  title: "Company Profile & About Us | AK Enterprise Corp",
   description:
-    "Learn about AK Enterprises, an export-oriented supplier of dehydrated vegetables, herbal powders, masala powders, and natural food ingredients based in Vijayawada, India.",
+    "Learn about AK Enterprise Corp (AK Enterprises Corp), a trusted company in India, reliable manufacturer, and leading enterprise solutions provider delivering world-class business products and professional corporate services.",
+  keywords: [
+    "AK Enterprise Corp company profile",
+    "AK Enterprise Corp business",
+    "best companies in India",
+    "trusted company in India",
+    "leading enterprise solutions",
+    "reliable manufacturer",
+    "enterprise company website",
+    "professional business services",
+    "business solutions provider",
+  ],
 };
 
 export default function AboutPage() {

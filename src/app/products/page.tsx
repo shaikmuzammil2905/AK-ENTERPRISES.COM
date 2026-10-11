@@ -5,9 +5,22 @@ import { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
 
 export const metadata: Metadata = {
-  title: "Products Catalogue | AK Enterprises - Dehydrated Food Ingredients",
+  title: "Product Catalogue & Wholesale Supplies | AK Enterprise Corp",
   description:
-    "Explore AK Enterprises' full range of dehydrated vegetables, herbal powders, masala powders, and natural food ingredients for global bulk supply and export.",
+    "Explore the official AK Enterprise Corp product catalogue. Leading B2B supplier and wholesale distributor in India offering high-quality industrial products, wholesale supplies, and instant supplier quotations.",
+  keywords: [
+    "AK Enterprise Corp products",
+    "AK Enterprise Corp supplier",
+    "product catalogue",
+    "online product enquiry",
+    "supplier quotation",
+    "wholesale products",
+    "B2B supplier India",
+    "industrial products supplier",
+    "quality products supplier",
+    "product supplier near me",
+    "reliable product supplier",
+  ],
 };
 
 export default function ProductsPage() {

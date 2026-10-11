@@ -30,20 +30,37 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!product) {
     return {
-      title: "Product Not Found | AK Enterprises",
+      title: "Product Not Found | AK Enterprise Corp",
     };
   }
 
+  const title = `${product.name} Wholesale Supplier | AK Enterprise Corp`;
+  const description = `${product.name} supplied by AK Enterprise Corp (AK Enterprises Corp). Leading manufacturer, wholesale distributor, and B2B supplier in India. Request quotes for ${product.name} today.`;
+
   return {
-    title: `${product.name} | AK Enterprises - Dehydrated Food Ingredients`,
-    description: product.shortDescription,
+    title,
+    description,
+    keywords: [
+      product.name,
+      `${product.name} supplier`,
+      `${product.name} India`,
+      `${product.name} wholesale`,
+      "AK Enterprise Corp products",
+      "wholesale supplier in India",
+      "quality products supplier",
+      "online product enquiry",
+      "supplier quotation",
+      "B2B supplier India",
+      "reliable product supplier",
+      "product supplier near me",
+    ],
     openGraph: {
-      title: `${product.name} | AK Enterprises`,
-      description: product.shortDescription,
+      title,
+      description,
       images: [
         {
           url: product.image,
-          alt: product.name,
+          alt: `${product.name} - AK Enterprise Corp`,
         },
       ],
     },
@@ -63,8 +80,37 @@ export default async function ProductDetailPage({ params }: PageProps) {
     .filter((p) => p.slug !== product.slug && p.categorySlug === product.categorySlug)
     .slice(0, 4);
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    image: product.image,
+    description: product.description || product.shortDescription,
+    brand: {
+      "@type": "Brand",
+      name: "AK Enterprise Corp",
+    },
+    category: product.category,
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "INR",
+      price: "0",
+      priceValidUntil: "2027-12-31",
+      itemCondition: "https://schema.org/NewCondition",
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "AK Enterprise Corp",
+      },
+    },
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       {/* Breadcrumb Bar */}
       <div className="bg-[#F1FAFE] border-b border-[#E1F2FB] py-3.5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

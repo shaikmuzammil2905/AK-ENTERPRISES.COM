@@ -6,9 +6,19 @@ import PreFooterCTA from "@/components/PreFooterCTA";
 import { companyInfo, getPhoneLink, getMailtoLink, getWhatsAppLink } from "@/data/company";
 
 export const metadata: Metadata = {
-  title: "Contact Us | AK Enterprises - Dehydrated Food Ingredients Inquiries",
+  title: "Contact Details & Supplier Quotation | AK Enterprise Corp",
   description:
-    "Get in touch with AK Enterprises for bulk quotes, product specifications, and export inquiries. Located in Vijayawada, Andhra Pradesh, India.",
+    "Get company contact information and online product enquiries for AK Enterprise Corp. Contact our Vijayawada office for wholesale supplier quotations, product specifications, and enterprise business services.",
+  keywords: [
+    "AK Enterprise Corp contact details",
+    "company contact information",
+    "online product enquiry",
+    "supplier quotation",
+    "local business services",
+    "product supplier near me",
+    "best supplier near me",
+    "affordable business solutions",
+  ],
 };
 
 export default function ContactPage() {

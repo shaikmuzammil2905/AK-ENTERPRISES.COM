@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Metadata } from "next";
 import Hero from "@/components/Hero";
 import CategoryCard from "@/components/CategoryCard";
 import ProductCard from "@/components/ProductCard";
@@ -10,6 +11,29 @@ import PreFooterCTA from "@/components/PreFooterCTA";
 import { getCategories, getProducts } from "@/lib/db";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: "AK Enterprise Corp | Official Website, Trusted Business Supplier & Wholesale Solutions India",
+  description:
+    "Welcome to the official website of AK Enterprise Corp (AK Enterprises Corp). A trusted business supplier, reliable manufacturer, and wholesale distributor in India offering industrial products, bulk food ingredients, and B2B solutions.",
+  keywords: [
+    "AK Enterprise Corp",
+    "AK Enterprises Corp",
+    "AK Enterprise Corp official website",
+    "AK Enterprise Corp India",
+    "best companies in India",
+    "trusted business supplier in India",
+    "reliable product supplier",
+    "wholesale supplier in India",
+    "industrial products supplier",
+    "business solutions provider",
+    "manufacturer in India",
+    "distributor in India",
+    "product supplier near me",
+    "best supplier near me",
+    "quality products supplier",
+  ],
+};
 
 export default async function HomePage() {
   const [categories, products] = await Promise.all([

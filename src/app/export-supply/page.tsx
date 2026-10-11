@@ -7,9 +7,20 @@ import CategoryCard from "@/components/CategoryCard";
 import { categories } from "@/data/categories";
 
 export const metadata: Metadata = {
-  title: "Export & Supply | AK Enterprises - Global Ingredients Supply",
+  title: "B2B Services & Global Supply | AK Enterprise Corp",
   description:
-    "Learn about our structured 4-step B2B inquiry and supply process for dehydrated vegetables, herbal powders, masala powders, and natural food ingredients.",
+    "Explore business-to-business services, wholesale supply, and corporate enterprise solutions from AK Enterprise Corp. A trusted top-rated supplier and manufacturer delivering certified products worldwide.",
+  keywords: [
+    "AK Enterprise Corp services",
+    "business-to-business services",
+    "B2B supplier India",
+    "wholesale supplier in India",
+    "top-rated supplier",
+    "corporate services in India",
+    "business solutions provider",
+    "products and services in India",
+    "reliable manufacturer",
+  ],
 };
 
 const steps = [
